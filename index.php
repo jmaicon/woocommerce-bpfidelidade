@@ -4,7 +4,7 @@
 *
 *  Plugin Name: BPFidelidade
 *  Plugin URI: http://github.com/jmaicon/bpfidelidade
-*  Description: Um plugin que integra sua loja woocommerce com o programa de fidelidade Banco de Pontos Fidelidade.
+*  Description: Um plugin para integrar qualquer loja na plataforma woocommerce com o programa de fidelidade Banco de Pontos Fidelidade.
 *  Author: Jorge Maicon
 *  Author URI: http://github.com/jmaicon/
 *  Version: 1.0
