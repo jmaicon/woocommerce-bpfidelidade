@@ -11,10 +11,11 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>'; ?>
 <catalogo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.bpfidelidade.com/schema/catalogo">
   <data><?php echo mysql2date('c', get_lastpostmodified('blog'), false); ?></data>
   <parceiro>
-    <codigo><?php echo get_option('codigo_parceiro'); ?></codigo>
-    <cnpj><?php echo get_option('cnpj'); ?></cnpj>
-    <nome><?php echo get_option('nome_fornecedor'); ?></nome>
-    <autorizacao><?php echo get_option('autorizacao'); ?></autorizacao>
+    <?php $settings = get_option('wbpf_settings'); ?>
+    <codigo><?php echo $settings['wbpf_codigo_parceiro']; ?></codigo>
+    <cnpj><?php echo $settings['wbpf_cnpj']; ?></cnpj>
+    <nome><?php echo $settings['wbpf_nome_fornecedor']; ?></nome>
+    <autorizacao><?php echo $settings['wbpf_autorizacao']; ?></autorizacao>
   </parceiro>
 
   <produtos> <?php
@@ -32,7 +33,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>'; ?>
       <promocional><?php echo $product->sale_price; ?></promocional>
       <custo></custo>
       <disponibilidade><?php echo $product->is_in_stock(); ?></disponibilidade>
-      <entrega>Varia de acordo com o local.</entrega>
+      <entrega>15</entrega>
       <validade>2015-03-30T00:00:00</validade>
       <imagens>
       	<!-- post thumbnail + gallery -->
