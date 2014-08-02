@@ -32,11 +32,48 @@ $settings = get_option('wbpf_settings'); ?>
       <detalhe><?php the_content_rss(); ?></detalhe>
       <categoria><?php echo get_the_term_list( $id, 'product_cat' ); ?></categoria>
       <preco><?php echo $product->regular_price; ?></preco>
-      <promocional><?php echo $product->sale_price; ?></promocional>
+      <promocional><?php echo $product->regular_price; ?></promocional>
       <custo></custo>
       <disponibilidade><?php echo $product->is_in_stock(); ?></disponibilidade>
       <entrega><?php echo $settings['wbpf_entrega']; ?></entrega>
-      <validade>2015-03-30T00:00:00</validade>
+
+      <?php
+        $months           = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+        $expiration_days  = 30;
+        $actual_year      = date('Y');
+        $actual_month     = date('m');
+        $actual_day       = date('d');
+        $expiration_year  = '';
+        $expiration_month = '';
+        $expiration_day   = '';
+        $expiration_date  = '';
+
+        for ( $i = 0; $i < count( $months ); $i++ ) {
+          if ( $actual_month == $i+1 ) {
+            $expiration_day = ( $actual_day + $expiration_days ) - $months[$i-1];
+
+            if ( $actual_day == 1 && $months[$i-1] == 31 ) {
+              $expiration_month = $actual_month;
+            } else {
+              $expiration_month = sprintf( '%02s', ( $actual_month + 1 ) );
+            }
+
+            if ( $expiration_month == 13 ) {
+              $expiration_month = sprintf( '%02s', 1 );
+            }
+
+            if ( $actual_month == 12 && $actual_day != 1 && $months[$i-1] !=31 ) {
+              $expiration_year = date( 'Y' ) + 1;
+            } else {
+              $expiration_year = $actual_year;
+            }
+          }
+        }
+
+        $expiration_date = $expiration_year . '-' . $expiration_month . '-' . $expiration_day . 'T00:00:00';
+      ?>
+
+      <validade><?php echo $expiration_date; ?></validade>
       <imagens>
         <imagem>
           <urlThumb><?php echo wp_get_attachment_url( get_post_thumbnail_id() ); ?></urlThumb>
