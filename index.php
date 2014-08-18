@@ -70,6 +70,8 @@ class wbpf_settings {
 
                 <p class="submit"><input type="submit" name="submit" class="button-primary" value="Salvar"></p>
             </form>
+
+            <p>Acesse o feed aqui: <a href="<?php bloginfo('url'); ?>/feed/products"><?php bloginfo('url'); ?>/feed/products</a></p>
         </div> <?php
     }
 
